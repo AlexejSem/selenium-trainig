@@ -1,27 +1,26 @@
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import shop.RealItem;
+import shop.VirtualItem;
 
 import java.util.Random;
 
-public class RealItemTest implements TestLifecycleLogger {
+public class RealItemTest {
 
-    @Test
-    void RealItemFieldsTest(){
-        RealItem realItem = new RealItem();
-        String name = new Faker().hitchhikersGuideToTheGalaxy().character();
-        double price = new Random().nextDouble(1000,10000);
-        double weight = new Random().nextDouble(0.5,9.99);
-        realItem.setName(name);
-        realItem.setPrice(price);
-        realItem.setWeight(weight);
+    private RealItem realItem;
 
-        Assertions.assertNotNull(realItem);
-        Assertions.assertEquals(name,realItem.getName());
-        Assertions.assertEquals(price,realItem.getPrice());
-        Assertions.assertEquals(weight,realItem.getWeight());
+    @BeforeEach
+    public void initTestData() {
+        realItem = new RealItem();
+        realItem.setName(new Faker().aviation().aircraft());
+        realItem.setPrice(1000);
+        realItem.setWeight(5000);
     }
 
-
+    @Test
+    void testRealItemTest(){
+        Assertions.assertTrue(realItem.toString().contains("Weight: 5000"));
+    }
 }
