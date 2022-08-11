@@ -1,17 +1,15 @@
 import com.github.javafaker.Faker;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 import shop.RealItem;
-import shop.VirtualItem;
-
-import java.util.Random;
 
 public class RealItemTest {
 
     private RealItem realItem;
 
-    @BeforeEach
+    @BeforeClass
     public void initTestData() {
         realItem = new RealItem();
         realItem.setName(new Faker().aviation().aircraft());
@@ -21,6 +19,11 @@ public class RealItemTest {
 
     @Test
     void testRealItemTest(){
-        Assertions.assertTrue(realItem.toString().contains("Weight: 5000"));
+        Assert.assertTrue(realItem.toString().contains("Weight: 5000"));
+    }
+
+    @AfterClass
+    void cleanup(){
+        realItem = null;
     }
 }
