@@ -9,7 +9,7 @@ public class StaticProvider {
                 ,{("src/main/resources/andrey-cart.json")}
                 ,{("src/main/resources/evgen-cart.json")}
                 ,{("test")}
-                };
-        }
+        };
     }
+}
 

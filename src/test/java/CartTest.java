@@ -8,7 +8,6 @@ import shop.Cart;
 import shop.VirtualItem;
 import java.io.File;
 
-
 public class CartTest {
 
     private Cart testCart;

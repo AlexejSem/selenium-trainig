@@ -3,7 +3,6 @@ import org.testng.annotations.*;
 import parser.JsonParser;
 import parser.NoSuchFileException;
 import shop.Cart;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -21,7 +20,6 @@ public class JsonParserTest {
         jsonParser = new JsonParser();
     }
 
-
     @Test
     void testWriteToFile() throws IOException {
         jsonParser.writeToFile(new Cart("alex-cart"));
@@ -29,7 +27,7 @@ public class JsonParserTest {
         Assert.assertEquals(actualFileContent, EXPECTED_FILE_CONTENT);
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     void testReadFromFile() {
         final Cart cart = jsonParser.readFromFile(new File("src/main/resources/andrew-cart.json"));
         List<String> actualResult = Arrays.asList(String.valueOf(cart.getCartName()), String.valueOf(cart.getTotalPrice()));
