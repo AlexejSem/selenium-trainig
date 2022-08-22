@@ -15,19 +15,25 @@ public class JsonParserTest {
     private JsonParser jsonParser;
     private static final String EXPECTED_FILE_CONTENT = "{\"cartName\":\"alex-cart\",\"realItems\":[],\"virtualItems\":[],\"total\":0.0}";
 
+    @BeforeGroups("include")
+    public void setJsonParser() {
+        jsonParser = new JsonParser();
+    }
+
     @BeforeMethod
     public void createData() {
         jsonParser = new JsonParser();
     }
 
-    @Test
-    void testWriteToFile() throws IOException {
-        jsonParser.writeToFile(new Cart("alex-cart"));
+    @Parameters("cartName")
+    @Test(groups = "exclude")
+    void testWriteToFile(String cartName) throws IOException {
+        jsonParser.writeToFile(new Cart(cartName));
         final String actualFileContent = Files.readString(Path.of("src/main/resources/alex-cart.json"));
         Assert.assertEquals(actualFileContent, EXPECTED_FILE_CONTENT);
     }
 
-    @Test(enabled = true)
+    @Test(groups = "include")
     void testReadFromFile() {
         final Cart cart = jsonParser.readFromFile(new File("src/main/resources/andrew-cart.json"));
         List<String> actualResult = Arrays.asList(String.valueOf(cart.getCartName()), String.valueOf(cart.getTotalPrice()));
@@ -35,7 +41,7 @@ public class JsonParserTest {
         Assert.assertEquals(actualResult, expectedResult);
     }
 
-    @Test(dataProvider = "path", dataProviderClass = StaticProvider.class)
+    @Test(dataProvider = "path", dataProviderClass = StaticProvider.class, groups = "include")
     void testThrowingNoSuchFileException(String path) {
         Assert.assertThrows(NoSuchFileException.class, () -> jsonParser.readFromFile(new File(path)));
     }
@@ -43,5 +49,6 @@ public class JsonParserTest {
     @AfterMethod
     public void deleteData() throws IOException {
         Files.deleteIfExists(Path.of("src/main/resources/alex-cart.json"));
+        jsonParser = null;
     }
 }
