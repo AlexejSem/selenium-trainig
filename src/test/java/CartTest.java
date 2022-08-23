@@ -1,21 +1,19 @@
 import com.github.javafaker.Faker;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 import parser.JsonParser;
 import shop.Cart;
-import shop.RealItem;
 import shop.VirtualItem;
-
 import java.io.File;
-
 
 public class CartTest {
 
     private Cart testCart;
     private VirtualItem virtualItem;
 
-    @BeforeEach
+    @BeforeClass
     public void initTestData() {
         JsonParser parser = new JsonParser();
         testCart = parser.readFromFile(new File("src/main/resources/eugen-cart.json"));
@@ -29,13 +27,19 @@ public class CartTest {
     @Test
     void testTotalCalculationWhileAddingItem() {
         final double totalPrice = testCart.getTotalPrice();
-        Assertions.assertEquals(27760.68, totalPrice);
+        Assert.assertEquals(totalPrice, 27760.68);
     }
 
     @Test
     void testTotalCalculationWhileDeletingItem() {
         testCart.deleteVirtualItem(virtualItem);
         final double totalPrice = testCart.getTotalPrice();
-        Assertions.assertNotEquals(26560.68, totalPrice);
+        Assert.assertNotEquals(totalPrice, 26560.68);
+    }
+
+    @AfterClass
+    void cleanup(){
+        testCart = null;
+        virtualItem = null;
     }
 }

@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="All tests except parametrized" verbose="1" >
+    <test name="Classes" >
+        <classes>
+            <class name="CartTest"></class>
+            <class name="JsonParserTest">
+                <methods>
+                    <exclude name="testWriteToFile"></exclude>
+                </methods>
+            </class>
+            <class name="VirtualItemTest"></class>
+            <class name="RealItemTest"></class>
+        </classes>
+    </test>
+</suite>
