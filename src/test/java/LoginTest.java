@@ -7,7 +7,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class TaskThirty {
+import java.time.Duration;
+
+public class LoginTest {
 
     private WebDriver webDriver;
 
@@ -15,11 +17,10 @@ public class TaskThirty {
     void setWebDriver(){
         webDriver = new ChromeDriver();
         webDriver.navigate().to("https://mail.yandex.com/");
-
     }
 
     @Test
-    void loginToYandexMail() throws InterruptedException {
+    void loginToYandexMailTest() throws InterruptedException {
         WebElement loginButton = webDriver.findElement(By.cssSelector("*[type='button']"));
         loginButton.click();
 
@@ -28,14 +29,14 @@ public class TaskThirty {
         WebElement signInButton = webDriver.findElement(By.id("passp:sign-in"));
         signInButton.click();
 
-        Thread.sleep(1000);
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
 
         WebElement enterPasswordField = webDriver.findElement(By.ByClassName.className("Textinput-Control"));
         enterPasswordField.sendKeys("task30task30");
         WebElement submitButton = webDriver.findElement(By.ByXPath.xpath("//*[@id='passp:sign-in']"));
         submitButton.click();
 
-        Thread.sleep(5000);
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
         Assertions.assertTrue(webDriver.findElement(By.ByCssSelector.cssSelector("*[aria-label*='Inbox']")).isDisplayed());
     }
