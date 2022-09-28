@@ -1,3 +1,4 @@
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,6 +23,7 @@ public class MultiSelectTest {
 
     @BeforeEach
     void setup() {
+        WebDriverManager.getInstance(ChromeDriver.class).setup();
         driver = new ChromeDriver();
         driver.navigate().to("https://demo.seleniumeasy.com/basic-select-dropdown-demo.html");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));

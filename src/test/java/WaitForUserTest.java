@@ -1,3 +1,4 @@
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,6 +21,7 @@ public class WaitForUserTest {
 
     @BeforeEach
     void setup() {
+        WebDriverManager.getInstance(ChromeDriver.class).setup();
         driver = new ChromeDriver();
         driver.navigate().to("https://demo.seleniumeasy.com/dynamic-data-loading-demo.html");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));

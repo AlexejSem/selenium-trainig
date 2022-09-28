@@ -1,3 +1,4 @@
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,6 +18,7 @@ public class RefreshPageOn50PercentTest {
 
     @BeforeEach
     void setup() {
+        WebDriverManager.getInstance(ChromeDriver.class).setup();
         driver = new ChromeDriver();
         driver.navigate().to("https://demo.seleniumeasy.com/bootstrap-download-progress-demo.html");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
