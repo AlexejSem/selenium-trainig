@@ -14,24 +14,26 @@ import java.time.Duration;
 public class WaitForUserTest {
 
     private WebDriver driver;
+    private final static By NEW_USER_BUTTON = By.cssSelector("button.btn");
+    private final static By USER_IMAGE = By.cssSelector("img[src*='https://randomuser.me/api/");
+
 
     @BeforeEach
-    void setup(){
+    void setup() {
         driver = new ChromeDriver();
         driver.navigate().to("https://demo.seleniumeasy.com/dynamic-data-loading-demo.html");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     }
 
     @Test
-    void waitForUserTest(){
-        WebElement getNewUserButton = driver.findElement(By.cssSelector("button.btn"));
-        getNewUserButton.click();
-        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions
-                .presenceOfNestedElementLocatedBy(By.cssSelector("div#loading"),By.cssSelector("div#loading > br:nth-child(2)")));
+    void waitForUserTest() {
+        driver.findElement(NEW_USER_BUTTON).click();
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.visibilityOfElementLocated(USER_IMAGE));
     }
 
     @AfterEach
-    void cleanup(){
+    void cleanup() {
         driver.close();
     }
 }

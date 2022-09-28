@@ -1,17 +1,14 @@
-public class ObjectsForSelection {
+public class Employee {
 
     private String name;
     private String position;
     private String office;
-    private int age;
-    private double salary;
 
-    public ObjectsForSelection(String name, String position, String office, int age, double salary) {
+
+    public Employee(String name, String position, String office) {
         this.name = name;
         this.position = position;
         this.office = office;
-        this.age = age;
-        this.salary = salary;
     }
 
     @Override

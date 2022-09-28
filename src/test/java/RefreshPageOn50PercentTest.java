@@ -1,22 +1,22 @@
-import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.net.http.HttpRequest;
 import java.time.Duration;
 
 public class RefreshPageOn50PercentTest {
     private WebDriver driver;
+    private final static By DOWNLOAD_BUTTON = By.id("cricle-btn");
+    private final static By PERCENTAGE_COUNT = By.cssSelector("div.percenttext");
+    private final static By DOWNLOAD_SECTION = By.cssSelector("div.panel.panel-primary");
 
     @BeforeEach
-    void setup(){
+    void setup() {
         driver = new ChromeDriver();
         driver.navigate().to("https://demo.seleniumeasy.com/bootstrap-download-progress-demo.html");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
@@ -24,18 +24,16 @@ public class RefreshPageOn50PercentTest {
 
     @Test
     void waitForUserTest() {
-        WebElement downloadButton = driver.findElement(By.id("cricle-btn"));
-        downloadButton.click();
-        WebElement percentText = driver.findElement(By.cssSelector("div.percenttext"));
-        new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.textToBePresentInElement(percentText,"50%"));
+        driver.findElement(DOWNLOAD_BUTTON).click();
+        new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions
+                .textToBePresentInElement(driver.findElement(PERCENTAGE_COUNT), "50%"));
         driver.navigate().refresh();
-        WebElement downloadSection = driver.findElement(By.cssSelector("div.panel.panel-primary"));
-        Assert.assertTrue(downloadSection.isDisplayed());
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions
+                .visibilityOfElementLocated(DOWNLOAD_SECTION));
     }
 
-
     @AfterEach
-    void cleanup(){
+    void cleanup() {
         driver.close();
     }
 }
