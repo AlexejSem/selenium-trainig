@@ -7,11 +7,12 @@ import org.openqa.selenium.WebDriver;
 
 public class LoginTest {
 
+    private WebDriver webDriver;
+    private StartPage startPage;
     private final static String URL = ("https://mail.yandex.com/");
     private static final String LOGIN_AND_PASSWORD = "task30, task30task30";
     private static final String EXPECTED_TEXT = "inbox";
-    private WebDriver webDriver;
-    private StartPage startPage;
+
 
     @BeforeEach
     void setup() {
