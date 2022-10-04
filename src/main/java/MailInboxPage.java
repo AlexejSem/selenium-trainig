@@ -6,13 +6,13 @@ import org.openqa.selenium.support.PageFactory;
 public class MailInboxPage {
 
     private final WebDriver webDriver;
+
     @FindBy(css = "div.user-pic>img")
     WebElement avatar;
     @FindBy(xpath = "//a[contains(@class, 'action_exit')]")
     WebElement logoutButton;
     @FindBy(css = "div[aria-label*='Inbox']>div>span")
     WebElement inbox;
-
 
     public MailInboxPage(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -34,7 +34,6 @@ public class MailInboxPage {
     }
 
     public String getInboxText() {
-        String text = inbox.getText().toLowerCase();
-        return text;
+        return inbox.getText().toLowerCase();
     }
 }

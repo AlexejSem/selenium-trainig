@@ -9,9 +9,10 @@ import java.time.Duration;
 
 public class StartPage {
 
+    private WebDriver webDriver;
+
     @FindBy(css = "button[type]")
     WebElement loginButton;
-    private WebDriver webDriver;
 
     public StartPage(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -25,7 +26,6 @@ public class StartPage {
 
     public boolean isLoginButtonDisplayed() {
         new WebDriverWait(this.webDriver, Duration.ofSeconds(7)).until(ExpectedConditions.visibilityOf(loginButton));
-        boolean isDisplayed = loginButton.isDisplayed();
-        return isDisplayed;
+        return loginButton.isDisplayed();
     }
 }

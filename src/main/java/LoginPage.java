@@ -5,13 +5,14 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage {
 
+    private WebDriver webDriver;
+
     @FindBy(id = "passp-field-login")
     WebElement emailInput;
     @FindBy(xpath = "//button[@id='passp:sign-in']")
     WebElement signInButton;
     @FindBy(id = "passp-field-passwd")
     WebElement passwordInput;
-    private WebDriver webDriver;
 
     public LoginPage(WebDriver webDriver) {
         this.webDriver = webDriver;

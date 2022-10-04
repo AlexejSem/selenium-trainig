@@ -30,7 +30,7 @@ public class Browser {
         return localInstance;
     }
 
-    public static WebDriver getWebDriver() {
+    public WebDriver getWebDriver() {
         return webDriver;
     }
 }
