@@ -3,10 +3,10 @@ import org.openqa.selenium.WebDriver;
 
 public class MailInboxPage {
 
+    private final WebDriver webDriver;
     private final static By AVATAR = By.cssSelector("div.user-pic>img");
     private final static By INBOX = By.cssSelector("div[aria-label*='Inbox']>div>span");
     private final static By LOGOUT_OPTION = By.xpath("//a[contains(@class, 'action_exit')]");
-    private final WebDriver webDriver;
 
     public MailInboxPage(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -27,7 +27,6 @@ public class MailInboxPage {
     }
 
     public String getInboxText() {
-        String text = webDriver.findElement(INBOX).getText().toLowerCase();
-        return text;
+        return webDriver.findElement(INBOX).getText().toLowerCase();
     }
 }

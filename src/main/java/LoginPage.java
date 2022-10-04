@@ -3,10 +3,10 @@ import org.openqa.selenium.WebDriver;
 
 public class LoginPage {
 
+    private WebDriver webDriver;
     private final static By EMAIL_FIELD = By.id("passp-field-login");
     private final static By SIGNIN_BUTTON = By.xpath("//button[@id='passp:sign-in']");
     private final static By PASSWORD_FIELD = By.id("passp-field-passwd");
-    private WebDriver webDriver;
 
     public LoginPage(WebDriver webDriver) {
         this.webDriver = webDriver;

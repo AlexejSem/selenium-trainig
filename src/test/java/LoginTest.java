@@ -23,7 +23,7 @@ public class LoginTest {
 
     @ParameterizedTest
     @CsvSource(LOGIN_AND_PASSWORD)
-    void logoutToYandexMailTest(String login, String password) {
+    void logoutFromYandexMailTest(String login, String password) {
         LoginPage loginPage = startPage.clickLoginButton();
         MailInboxPage mailInboxPage = loginPage.loginToMail(login, password);
         mailInboxPage.logout();

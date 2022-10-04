@@ -7,8 +7,8 @@ import java.time.Duration;
 
 public class StartPage {
 
-    private static By LOGIN_BUTTON = By.cssSelector("button[type]");
     private WebDriver webDriver;
+    private static By LOGIN_BUTTON = By.cssSelector("button[type]");
 
     public StartPage(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -21,7 +21,6 @@ public class StartPage {
 
     public boolean isLogInButtonDisplayed() {
         new WebDriverWait(this.webDriver, Duration.ofSeconds(7)).until(ExpectedConditions.presenceOfElementLocated(LOGIN_BUTTON));
-        boolean btnDisplayed = webDriver.findElement(LOGIN_BUTTON).isDisplayed();
-        return btnDisplayed;
+        return webDriver.findElement(LOGIN_BUTTON).isDisplayed();
     }
 }
