@@ -10,7 +10,6 @@ public class LoginTest {
 
     private WebDriver webDriver;
     private StartPage startPage;
-    private LoginPage loginPage;
     private MailInboxPage mailInboxPage;
     private final static String URL = ("https://mail.yandex.com/");
     private static final String LOGIN = "task30";
@@ -24,7 +23,7 @@ public class LoginTest {
         webDriver = browser.getWebDriver();
         webDriver.get(URL);
         startPage = new StartPage(webDriver);
-        loginPage = startPage.clickLoginButton();
+        LoginPage loginPage = startPage.clickLoginButton();
         mailInboxPage = loginPage.loginToMail(LOGIN, PASSWORD);
 
 
