@@ -1,48 +1,67 @@
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.*;
 
 import java.io.IOException;
+import java.time.Duration;
 
+@Epic("Login and logout tests")
+@Feature("Login and logout tests")
+@Listeners(TestListener.class)
 public class LoginTest {
 
-    private WebDriver webDriver;
-    private StartPage startPage;
-    private MailInboxPage mailInboxPage;
     private final static String URL = ("https://mail.yandex.com/");
     private static final String LOGIN = "task30";
     private static final String PASSWORD = "task30task30";
     private static final String EXPECTED_TEXT = "inbox";
+    private static WebDriver webDriver;
+    private StartPage startPage;
+    private MailInboxPage mailInboxPage;
+    private Browser browser;
 
 
-    @BeforeEach
+    @BeforeTest
     void setup() throws IOException {
-        Browser browser = Browser.getInstance();
+        browser = Browser.getInstance();
         webDriver = browser.getWebDriver();
         webDriver.get(URL);
         startPage = new StartPage(webDriver);
         startPage.getScreenShot();
         LoginPage loginPage = startPage.clickLoginButton();
         mailInboxPage = loginPage.loginToMail(LOGIN, PASSWORD);
-
-
     }
 
     @Test
+    @Description("Verification of log out from Yandex Mail")
+    @Story("Verify user logout from Yandex Mail and navigated to Start page")
     void logoutFromYandexMailTest() {
         mailInboxPage.logout();
-        Assertions.assertTrue(startPage.isLogInButtonDisplayed());
+        Assert.assertTrue(startPage.isLogInButtonDisplayed());
     }
 
     @Test
+    @Description("Verification of log in into Yandex Mail")
+    @Story("Verify user login to Yandex Mail")
     void loginToYandexMailTest() {
-        Assertions.assertEquals(mailInboxPage.getInboxText(), EXPECTED_TEXT);
+        Assert.assertEquals(mailInboxPage.getInboxText(), EXPECTED_TEXT);
     }
 
-    @AfterEach
+    @Test
+    @Description("Negative test for non-displayed element")
+    void loginToMailAndFindUsernameTest() {
+        Assert.assertTrue(mailInboxPage.isDisplayedUsername());
+    }
+
+    @AfterTest
     void cleanup() {
         webDriver.close();
     }
+
 }
+

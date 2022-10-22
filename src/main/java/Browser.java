@@ -7,14 +7,14 @@ import java.time.Duration;
 public class Browser {
 
     private static WebDriver webDriver;
-    private static volatile Browser instance;
+    private static volatile Browser instance = null;
 
     private Browser() {
         WebDriverManager.getInstance(ChromeDriver.class).setup();
         webDriver = new ChromeDriver();
         webDriver.manage().window().fullscreen();
-        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+        webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
     }
 
     public static Browser getInstance() {
