@@ -22,11 +22,6 @@ public class StartPage {
         this.webDriver = webDriver;
     }
 
-    public void getScreenShot() throws IOException {
-        File scrFile = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(scrFile, new File(SCREENSHOT_FILE_PATH));
-    }
-
     @Step("Click Login button to get to Login Page")
     public LoginPage clickLoginButton() {
         webDriver.findElement(LOGIN_BUTTON).click();
@@ -35,7 +30,7 @@ public class StartPage {
 
     @Step("Verify Login button is displayed")
     public boolean isLogInButtonDisplayed() {
-        new WebDriverWait(this.webDriver, Duration.ofSeconds(7)).
+        new WebDriverWait(this.webDriver, Duration.ofSeconds(15)).
                 until(ExpectedConditions.presenceOfElementLocated(LOGIN_BUTTON));
         return webDriver.findElement(LOGIN_BUTTON).isDisplayed();
     }

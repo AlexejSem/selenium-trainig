@@ -1,6 +1,10 @@
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class MailInboxPage {
 
@@ -38,6 +42,8 @@ public class MailInboxPage {
 
     @Step("Verify username is displayed")
     public boolean isDisplayedUsername() {
+        new WebDriverWait(this.webDriver, Duration.ofSeconds(15))
+                .until(ExpectedConditions.presenceOfElementLocated(INBOX));
         return webDriver.findElement(USERNAME).isDisplayed();
     }
 }

@@ -28,11 +28,9 @@ public class LoginTest {
 
     @BeforeTest
     void setup() throws IOException {
-        browser = Browser.getInstance();
-        webDriver = browser.getWebDriver();
+        webDriver = Browser.getInstance().getWebDriver();
         webDriver.get(URL);
         startPage = new StartPage(webDriver);
-        startPage.getScreenShot();
         LoginPage loginPage = startPage.clickLoginButton();
         mailInboxPage = loginPage.loginToMail(LOGIN, PASSWORD);
     }
