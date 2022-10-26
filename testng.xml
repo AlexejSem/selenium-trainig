@@ -3,7 +3,9 @@
 <suite name="Suite1" verbose="1">
     <test name="Login and logout tests">
         <classes>
-            <class name="GoogleTest"/>
+            <class name="GoogleWin10EdgeLatestTest"/>
+            <class name="GoogleWin8_1FirefoxTest"/>
+            <class name="GoogleLinuxChrome40Test"/>
         </classes>
     </test>
 </suite>
