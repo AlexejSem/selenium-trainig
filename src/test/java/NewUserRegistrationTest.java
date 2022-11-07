@@ -1,43 +1,57 @@
-import Browsers.FireFoxBrowser;
+import Browsers.ChromeBrowser;
 import Pages.AuthenticationPage;
 import Pages.IndexPage;
 import Pages.MyAccountPage;
-import io.qameta.allure.Allure;
-import io.qameta.allure.Attachment;
+import Pages.RegistrationPage;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.TestWatcher;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.aggregator.AggregateWith;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
-public class LoginTest {
+
+@Epic("Login and logout tests")
+@Feature("Login and logout tests")
+@ExtendWith(NewUserRegistrationTest.TestListener.class)
+public class NewUserRegistrationTest {
 
     private final static String URL = ("http://automationpractice.com/index.php");
     private static WebDriver driver;
     private static byte[] screenshot;
     private IndexPage indexPage;
     private AuthenticationPage authenticationPage;
-    private final static String EMAIL_AND_PASSWORD = "{33@33.rrr, 1qaz!QAZ}";
+    private final static String CSV_FILE_NAME = "src/test/NewUserFile/users.csv";
+
 
     @BeforeEach
     void setup() {
-        driver = FireFoxBrowser.getInstance().getWebDriver();
+        driver = ChromeBrowser.getInstance().getWebDriver();
         driver.get(URL);
         indexPage = new IndexPage(driver);
         authenticationPage = indexPage.clickSignInButton();
+
     }
 
     @ParameterizedTest
-    @CsvSource(EMAIL_AND_PASSWORD)
-    void loginTest(String email, String password){
-        MyAccountPage myAccountPage = authenticationPage.login(email, password);
-        Assertions.assertTrue(myAccountPage.isUserLoggedIn());
+    @CsvFileSource(files = "src/test/resources/newUser.csv")
+    @Description("Verification of new user registration ability")
+    @Story("Register new user")
+    void registerNewUserTest(@AggregateWith(UserAggregator.class) User user) {
+        RegistrationPage registrationPage = authenticationPage.createAccount(user.getEmail());
+        MyAccountPage myAccountPage = registrationPage
+                .registerNewUser(user.getFirstName(), user.getLastName(), user.getPassword(), user.getAddress(),
+                        user.getCity(), user.getState(), user.getPostcode(), user.getMobilePhone());
+        Assertions.assertTrue(myAccountPage.isUserRegistered());
     }
+
 
     @AfterEach
     void cleanup() {
@@ -60,7 +74,9 @@ public class LoginTest {
 
         @Attachment(value = "Page Screenshot", type = "image/png")
         private static byte[] makeScreenshot() {
-            return ((TakesScreenshot) FireFoxBrowser.getInstance().getWebDriver()).getScreenshotAs(OutputType.BYTES);
+            return ((TakesScreenshot) ChromeBrowser.getInstance().getWebDriver()).getScreenshotAs(OutputType.BYTES);
         }
     }
 }
+
+
