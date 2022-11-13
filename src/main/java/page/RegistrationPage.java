@@ -1,10 +1,11 @@
-package Pages;
+package page;
 
+import helper.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class RegistrationPage {
+public class RegistrationPage extends BasePage {
     private WebDriver driver;
     private static final By FIRSTNAME_INPUT = By.cssSelector("input#customer_firstname");
     private static final By LASTNAME_INPUT = By.cssSelector("input#customer_lastname");
@@ -17,23 +18,21 @@ public class RegistrationPage {
     private static final By SUBMIT_BUTTON = By.id("submitAccount");
 
 
-    public RegistrationPage(WebDriver driver) {
-        this.driver = driver;
+    public RegistrationPage() {
     }
 
-    public MyAccountPage registerNewUser(String firstName, String lastName, String password, String address,
-                                         String city, int state, String postCode, String mobilePhone) {
-        driver.findElement(FIRSTNAME_INPUT).sendKeys(firstName);
-        driver.findElement(LASTNAME_INPUT).sendKeys(lastName);
-        driver.findElement(PASSWORD_INPUT).sendKeys(password);
-        driver.findElement(ADDRESS_INPUT).sendKeys(address);
-        driver.findElement(CITY_INPUT).sendKeys(city);
+    public MyAccountPage registerNewUser(User user) {
+        driver.findElement(FIRSTNAME_INPUT).sendKeys(user.getFirstname());
+        driver.findElement(LASTNAME_INPUT).sendKeys(user.getLastname());
+        driver.findElement(PASSWORD_INPUT).sendKeys(user.getPassword());
+        driver.findElement(ADDRESS_INPUT).sendKeys(user.getAddress());
+        driver.findElement(CITY_INPUT).sendKeys(user.getCity());
         Select statesDropDown = new Select(driver.findElement(STATE_SELECT));
-        statesDropDown.selectByValue(String.valueOf(state));
-        driver.findElement(POST_CODE_INPUT).sendKeys(postCode);
-        driver.findElement(MOBILE_PHONE_INPUT).sendKeys(mobilePhone);
+        statesDropDown.selectByVisibleText(user.getState());
+        driver.findElement(POST_CODE_INPUT).sendKeys(user.getPostcode());
+        driver.findElement(MOBILE_PHONE_INPUT).sendKeys(user.getPhoneNumber());
         driver.findElement(SUBMIT_BUTTON).click();
-        return new MyAccountPage(driver);
+        return new MyAccountPage();
     }
 
 }
