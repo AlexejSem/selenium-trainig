@@ -12,7 +12,7 @@ public class CartPage extends BasePage {
     }
 
     public double getActualProductsTotal() {
-        return TestUtil.priceParser(driver.findElement(TOTAL_PRODUCT_PRICE).getText());
+        return TestUtil.parsePrice(driver.findElement(TOTAL_PRODUCT_PRICE).getText());
     }
 
 }
