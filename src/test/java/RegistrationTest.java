@@ -27,7 +27,7 @@ public class RegistrationTest {
         RegistrationPage registrationPage = authenticationPage.createAccount(user.getEmail());
         MyAccountPage myAccountPage = registrationPage
                 .registerNewUser(user);
-        Assert.assertTrue(myAccountPage.isUserRegistered());
+        Assert.assertTrue(myAccountPage.myAccountPageIsDisplayed());
     }
 }
 

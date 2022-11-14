@@ -12,7 +12,7 @@ public class ShopPage extends BasePage {
     private final static By LIST_VIEW = By.cssSelector("li#list");
     private final static By PRODUCT_CONTAINER = By.cssSelector(".product_container");
     private final static By ADD_TO_CART =
-            By.xpath("//div[@id='center_column']/ul/li//a[@title='Add to cart']");
+            By.xpath("//a[@title='Add to cart']");
     private final static By PRODUCT_PRICE =
             By.xpath("//li//div[contains(@class, 'col')]/span[@itemprop='price']");
     private final static By CART = By.cssSelector("div.shopping_cart > a[href]");
@@ -32,7 +32,7 @@ public class ShopPage extends BasePage {
         List<WebElement> containers = driver.findElements(PRODUCT_CONTAINER);
         for (int k = 0; k < qty; k++) {
             int i = new Random().nextInt(containers.size());
-            totalPrice += TestUtil.priceParser(containers.get(i).findElement(PRODUCT_PRICE).getText());
+            totalPrice += TestUtil.parsePrice(containers.get(i).findElement(PRODUCT_PRICE).getText());
             containers.get(i).findElement(ADD_TO_CART).click();
             driver.findElement(CONTINUE_SHOPPING).click();
         }

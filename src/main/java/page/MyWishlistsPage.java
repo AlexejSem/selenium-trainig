@@ -22,7 +22,7 @@ public class MyWishlistsPage extends BasePage {
         return driver.findElement(CREATED_WISHLIST).isDisplayed();
     }
 
-    public int productsDisplayedInWishList() {
+    public int getWishListProductsQty() {
         return Integer.parseInt(driver.findElement(QUANTITY_OF_PRODUCTS).getText());
     }
 

@@ -10,7 +10,7 @@ public class BaseTest {
 
     private WebDriver driver;
     private HomePage homePage;
-    AuthenticationPage authenticationPage;
+    protected AuthenticationPage authenticationPage;
 
     @BeforeTest
     void setup() {

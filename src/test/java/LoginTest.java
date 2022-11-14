@@ -14,7 +14,7 @@ public class LoginTest extends BaseTest {
     void loginTest() {
         User user = TestUtil.getUser(EXISTING_USER);
         MyAccountPage myAccountPage = authenticationPage.login(user);
-        Assert.assertTrue(myAccountPage.isUserLoggedIn());
+        Assert.assertTrue(myAccountPage.myAccountPageIsDisplayed());
     }
 
 }
