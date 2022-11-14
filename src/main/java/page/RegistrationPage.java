@@ -2,11 +2,9 @@ package page;
 
 import helper.User;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
 public class RegistrationPage extends BasePage {
-    private WebDriver driver;
     private static final By FIRSTNAME_INPUT = By.cssSelector("input#customer_firstname");
     private static final By LASTNAME_INPUT = By.cssSelector("input#customer_lastname");
     private static final By PASSWORD_INPUT = By.cssSelector("input#passwd");
@@ -17,8 +15,8 @@ public class RegistrationPage extends BasePage {
     private static final By MOBILE_PHONE_INPUT = By.cssSelector("input#phone_mobile");
     private static final By SUBMIT_BUTTON = By.id("submitAccount");
 
-
     public RegistrationPage() {
+        super();
     }
 
     public MyAccountPage registerNewUser(User user) {

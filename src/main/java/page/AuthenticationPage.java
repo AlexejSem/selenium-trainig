@@ -2,7 +2,6 @@ package page;
 
 import helper.User;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 public class AuthenticationPage extends BasePage {
 
@@ -11,9 +10,9 @@ public class AuthenticationPage extends BasePage {
     private final static By EMAIL_FIELD = By.cssSelector("input#email");
     private final static By PASSWORD_FIELD = By.cssSelector("input#passwd");
     private final static By SIGN_IN_BUTTON = By.cssSelector("button#SubmitLogin");
-    private WebDriver driver;
 
     public AuthenticationPage() {
+        super();
     }
 
     public RegistrationPage createAccount(String email) {

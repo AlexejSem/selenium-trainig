@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 
 public class MyWishlistsPage extends BasePage {
 
-    private WebDriver driver;
     private final static By CREATED_WISHLIST = By.cssSelector("tbody > tr:first-child > td:nth-child(1) > a");
 
     private final static By QUANTITY_OF_PRODUCTS = By.xpath("//tbody/tr[1]/td[2]");
@@ -16,6 +15,7 @@ public class MyWishlistsPage extends BasePage {
     private final static By DELETE_WISHLIST = By.xpath("//tr[1]/ td[@class='wishlist_delete']/a");
 
     public MyWishlistsPage() {
+        super();
     }
 
     public boolean isWishListCreated() {

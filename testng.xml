@@ -3,19 +3,10 @@
 
 <suite name="Store Tests" verbose="1">
     <test name="Store App Tests">
-        <groups>
-            <run>
-                <include name="test"/>
-                <include name="user"/>
-            </run>
-            <dependencies>
-                <group name="test" depends-on="user"/>
-            </dependencies>
-        </groups>
     </test>
     <test name="Store Application Test">
         <classes>
-            <class name="NewUserRegistrationTest"/>
+            <class name="RegistrationTest"/>
             <class name="LoginTest"/>
             <class name="WishlistAndCartTest"/>
         </classes>

@@ -26,8 +26,9 @@ public class Driver {
     private Driver() {
         if (REMOTE_URL.contains("local")) {
             setLocalDriver();
+        }else {
+            setRemoteDriver();
         }
-        setRemoteDriver();
     }
 
     public static Driver getInstance() {
@@ -52,7 +53,7 @@ public class Driver {
                 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
                 driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
             }
-            case "forefox" -> {
+            case "firefox" -> {
                 WebDriverManager.getInstance(FirefoxDriver.class).setup();
                 driver = new FirefoxDriver();
                 driver.manage().window().fullscreen();
@@ -76,7 +77,7 @@ public class Driver {
 
     private Capabilities getCapabilities() {
         switch (BROWSER) {
-            case "crome" -> {
+            case "chrome" -> {
                 ChromeOptions option = new ChromeOptions();
                 option.setCapability("os", "Windows");
                 return option;

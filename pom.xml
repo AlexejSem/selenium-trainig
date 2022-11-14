@@ -7,7 +7,7 @@
     <artifactId>UnitTesting</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
-        <aspectj.version>1.8.10</aspectj.version>
+        <aspectj.version>1.9.6</aspectj.version>
     </properties>
     <build>
         <plugins>

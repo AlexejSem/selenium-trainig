@@ -32,7 +32,7 @@ public class TestUtil {
     }
 
     public static int randomInt() {
-        return new Random().nextInt(1, 10);
+        return new Random().nextInt(10);
     }
 
 }

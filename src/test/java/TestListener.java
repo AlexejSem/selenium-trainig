@@ -7,8 +7,6 @@ import org.testng.ITestResult;
 
 public class TestListener implements ITestListener {
 
-    private static final Driver driver = null;
-
     @Override
     public void onTestFailure(ITestResult result) {
         takeScreenshot();
@@ -16,6 +14,6 @@ public class TestListener implements ITestListener {
 
     @Attachment(value = "Page Screenshot", type = "image/png")
     private byte[] takeScreenshot() {
-        return ((TakesScreenshot) driver.getInstance().getDriver()).getScreenshotAs(OutputType.BYTES);
+        return ((TakesScreenshot) Driver.getInstance().getDriver()).getScreenshotAs(OutputType.BYTES);
     }
 }

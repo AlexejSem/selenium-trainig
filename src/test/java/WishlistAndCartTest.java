@@ -1,4 +1,6 @@
 import helper.TestUtil;
+import helper.User;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Listeners;
 import page.*;
 import org.testng.Assert;
@@ -9,24 +11,25 @@ import static helper.Constants.*;
 @Listeners(TestListener.class)
 public class WishlistAndCartTest extends BaseTest {
 
-    private AuthenticationPage authenticationPage;
     private MyAccountPage myAccountPage;
+    private MyWishlistsPage myWishlistsPage;
 
     @Test
     void autoCreationOfWishlistTest() {
-        myAccountPage = authenticationPage.login(helper.TestUtil.getUser(USA_USER));
+        User user = TestUtil.getUser(USA_USER);
+        myAccountPage = authenticationPage.login(user);
         MyWishlistsPage myWishlistsPage = myAccountPage.getToMyWishlistsPage();
         ProductDetailPage productDetailPage = myWishlistsPage.navigateToProductDetailPage();
         productDetailPage.addProductToWishList();
         productDetailPage.navigateToMyAccountPage();
         myAccountPage.getToMyWishlistsPage();
         Assert.assertTrue(myWishlistsPage.isWishListCreated());
-        myWishlistsPage.deleteWishList();
     }
 
     @Test
     void addingProductToManuallyCreatedWishlist() {
-        myAccountPage = authenticationPage.login(helper.TestUtil.getUser(CANADIAN_USER));
+        User user = TestUtil.getUser(CANADIAN_USER);
+        myAccountPage = authenticationPage.login(user);
         MyWishlistsPage myWishlistsPage = myAccountPage.getToMyWishlistsPage();
         myWishlistsPage.createNewWishList(WISHLIST_NAME);
         ProductDetailPage productDetailPage = myWishlistsPage.navigateToProductDetailPage();
@@ -34,17 +37,24 @@ public class WishlistAndCartTest extends BaseTest {
         productDetailPage.navigateToMyAccountPage();
         myAccountPage.getToMyWishlistsPage();
         Assert.assertEquals(EXPECTED_QUANTITY_OF_PRODUCTS, myWishlistsPage.productsDisplayedInWishList());
-        myWishlistsPage.deleteWishList();
     }
 
     @Test
     void addProductsToCartTest() {
-        myAccountPage = authenticationPage.login(helper.TestUtil.getUser(EXISTING_USER));
+        User user = TestUtil.getUser(EXISTING_USER);
+        myAccountPage = authenticationPage.login(user);
         ShopPage shopPage = myAccountPage.selectWomenCategory();
         double expectedPrice = shopPage.addProductsToCart(TestUtil.randomInt());
         CartPage cartPage = shopPage.navigateToCartPage();
         double actualPrice = cartPage.getActualProductsTotal();
         Assert.assertEquals(expectedPrice, actualPrice);
+    }
+
+    @AfterMethod
+    public void clearWishList() {
+        if (myWishlistsPage.isWishListCreated()) {
+            myWishlistsPage.deleteWishList();
+        }
     }
 
 }

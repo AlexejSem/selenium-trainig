@@ -2,7 +2,6 @@ package page;
 
 import helper.TestUtil;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -10,7 +9,6 @@ import java.util.Random;
 
 public class ShopPage extends BasePage {
 
-    private WebDriver driver;
     private final static By LIST_VIEW = By.cssSelector("li#list");
     private final static By PRODUCT_CONTAINER = By.cssSelector(".product_container");
     private final static By ADD_TO_CART =
@@ -21,12 +19,12 @@ public class ShopPage extends BasePage {
     private final static By CONTINUE_SHOPPING = By.cssSelector("div.button-container > span[title='Continue shopping']");
 
     public ShopPage() {
+        super();
     }
 
     private void clickProductsListView() {
         driver.findElement(LIST_VIEW).click();
     }
-
 
     public double addProductsToCart(int qty) {
         clickProductsListView();
