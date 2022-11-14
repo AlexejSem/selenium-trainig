@@ -15,9 +15,7 @@ import static helper.Constants.USA_USER;
 @Epic("Login and logout tests")
 @Feature("Login and logout tests")
 @Listeners(TestListener.class)
-public class RegistrationTest {
-
-    private AuthenticationPage authenticationPage;
+public class RegistrationTest extends BaseTest {
 
     @Test
     @Description("Verification of new user registration ability")

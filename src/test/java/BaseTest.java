@@ -8,15 +8,14 @@ import org.testng.annotations.BeforeTest;
 
 public class BaseTest {
 
-    private WebDriver driver;
-    private HomePage homePage;
+    protected WebDriver driver;
     protected AuthenticationPage authenticationPage;
 
     @BeforeTest
     void setup() {
         driver = Driver.getInstance().getDriver();
         driver.get(Constants.URL);
-        homePage = new HomePage();
+        HomePage homePage = new HomePage();
         authenticationPage = homePage.clickSignInButton();
     }
 
