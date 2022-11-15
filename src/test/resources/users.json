@@ -1,0 +1,47 @@
+﻿[
+  {
+    "firstname": "firstName",
+    "lastname": "lastName",
+    "email": "kr123a@yahoo.com",
+    "password": "3edc#EDC",
+    "address": "address",
+    "city": "West Point",
+    "state": "Alabama",
+    "postcode": "12345",
+    "phoneNumber": "375295555555"
+  },
+  {
+    "firstname": "firstName2",
+    "lastname": "lastName2",
+    "email": "kra@hotmail.com",
+    "password": "1qaz!QAZ",
+    "address": "address",
+    "city": "Manchester",
+    "state": "California",
+    "postcode": "54321",
+    "phoneNumber": "375296666666"
+  },
+  {
+    "firstname": "firstName2",
+    "lastname": "lastName2",
+    "email": "asdad@gmail.com",
+    "password": "1qaz!QAZ",
+    "address": "address",
+    "city": "Reno",
+    "state": "Texas",
+    "postcode": "54321",
+    "phoneNumber": "375296666666"
+  },
+  {
+    "firstname": "firstName2",
+    "lastname": "lastName2",
+    "email": "morlean@email.com",
+    "password": "123456789",
+    "address": "address",
+    "city": "Hope",
+    "state": "Alaska",
+    "postcode": "54321",
+    "phoneNumber": "375296666666"
+  }
+]
+
